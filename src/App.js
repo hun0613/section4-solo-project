@@ -1,23 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+import styled from 'styled-components';
+import { Route, Routes, Link } from 'react-router-dom';
+import { useState } from 'react';
+
+import MainPage from './pages/MainPage';
+import TabBar from './components/TabBar';
+import All from './pages/All';
+import Todo from './pages/Todo';
+import Inprogress from './pages/Inprogress';
+import Done from './pages/Done';
+import Header from './components/Header';
+
+
 
 function App() {
+
+  const [home, setHome] = useState(true);
+
+  const handleClick = () => {
+    setHome(false);
+  }
+
+  const HeaderClick = () => {
+    setHome(true);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* {home ? null: <Header HeaderClick = {HeaderClick}/>} */}
+      <Routes>
+        <Route path='/' element={<MainPage/>} />
+        {/* <Route path='/all' element={<All/>} /> */}
+        <Route path='/todo' element={<Todo/>} />
+        <Route path='/inprogress' element={<Inprogress/>} />
+        <Route path='/done' element={<Done/>} />
+      </Routes>
+      <TabBar handleClick = {handleClick}/>
     </div>
   );
 }
